@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace InfoSearch
 {
@@ -6,7 +7,8 @@ namespace InfoSearch
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
+            new WebClient().DownloadFile("http://google.com", @"C:\Users\visqas\source\repos\InfoSearch\web_pages\page.html");
         }
     }
 }
