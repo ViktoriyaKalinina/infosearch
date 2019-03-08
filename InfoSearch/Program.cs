@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 
 namespace InfoSearch
@@ -7,18 +8,21 @@ namespace InfoSearch
     {
         static void Main(string[] args)
         {
+            string docPath = @"/Users/visqas/infosearch/web_pages";
 
-            string remoteUrl = "https://iknigi.net/avtor-arkadiy-i-boris-strugackie/171272-sobranie-sochineniy-tom-5-19671968-arkadiy-i-boris-strugackie/read/page-1.html";
-            string fileName = @"/Users/visqas/infosearch/web_pages/page2.html";
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "index.txt"), true))
+            using (var client = new WebClient())
+            {
+                for (int i = 1; i <= 100; i++)
+                {
+                    string remoteUrl = String.Format("http://online-knigi.com/page/196339?page={0}", i);
+                    string fileName = String.Format(@"/Users/visqas/infosearch/web_pages/page{0}.html", i);
 
-            new WebClient().DownloadFile(remoteUrl, fileName);
+                    client.DownloadFile(remoteUrl, fileName);
 
-            //            using (var client = new WebClient())
-            //                {
-            //                    for(int i = 1; i <= 10; i++)
-            //                        {  
-            //                            client.DownloadFile(url + i, @"/Users/visqas/infosearch/web_pages/page{i}");
-            //                        }
+                    outputFile.WriteLine("doc: {0}, url: {1}", i, remoteUrl);
+                }
+            }
         }
     }
 }
