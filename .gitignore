@@ -259,3 +259,8 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+
+# aga 
+.DS_Store
+web_pages/.DS_Store
+.gitattributes
