@@ -14,7 +14,7 @@ namespace InfoSearch
 
             HtmlDocument htmlDoc = new HtmlDocument();
 
-            int counter = 100;
+            int counter = 10;
             for (int i = 1; i <= counter; i++)
             {
                 string remoteUrl = String.Format("http://online-knigi.com/page/196339?page={0}", i);
@@ -24,21 +24,15 @@ namespace InfoSearch
                 request.Method = "GET";
 
                 using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "index.txt"), true))
+                using (StreamWriter file = new StreamWriter(fileName))
+                using (var response = (HttpWebResponse)request.GetResponse())
+                using (var stream = response.GetResponseStream())
                 {
-                    using (var response = (HttpWebResponse)request.GetResponse())
-                    {
-                        using (var stream = response.GetResponseStream())
-                        {
-                            using (StreamWriter file = new StreamWriter(fileName))
-                            {
-                                htmlDoc.Load(stream);
-                                resultDoc = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"content\"]/div[2]/div/div[3]").InnerText;
+                    htmlDoc.Load(stream);
+                    resultDoc = htmlDoc.DocumentNode.SelectSingleNode("//*[@id=\"content\"]/div[2]/div/div[3]").InnerText;
 
-                                file.WriteLine(resultDoc);
-                                outputFile.WriteLine("doc: {0}, url: {1}", i, remoteUrl);
-                            }
-                        }
-                    }
+                    file.WriteLine(resultDoc);
+                    outputFile.WriteLine("doc: {0}, url: {1}", i, remoteUrl);
                 }
             }
         }
