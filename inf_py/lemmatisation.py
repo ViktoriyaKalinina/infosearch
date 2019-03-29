@@ -12,7 +12,7 @@ def remove_punctuation(text):
 while i < counter:
   read_file = ("/Users/visqas/infosearch/inf_dotnet/web_pages/%dpage.txt" % i)
   write_file = ("/Users/visqas/infosearch/inf_py/lemmatisation_files/%doutput.txt" % i)
-  
+
   f = open(read_file)
   text = f.read()
   txt_wo_punctuation = remove_punctuation(text)
@@ -25,4 +25,4 @@ while i < counter:
       o.write(p.normal_form + "\n")
       f.close()
   
-  i = i + 1
+  i += 1
