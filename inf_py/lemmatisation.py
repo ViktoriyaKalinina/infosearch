@@ -24,5 +24,4 @@ while i < counter:
       p = morph.parse(word)[0]
       o.write(p.normal_form + "\n")
       f.close()
-  
   i += 1
