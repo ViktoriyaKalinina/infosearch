@@ -264,3 +264,5 @@ __pycache__/
 .DS_Store
 web_pages/.DS_Store
 .gitattributes
+
+/Users/visqas/infosearch/inf_py/.vscode
